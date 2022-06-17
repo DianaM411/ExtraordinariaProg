@@ -48,7 +48,7 @@ public class Main {
                     }
 
                     //guardamos totos los codigos de distrito en un Arraylist
-                    listaCodDistritos.add(parte[10]);
+                    listaCodDistritos.add(parte[8]);
                 }
                 count++; // count increments as you read lines
             }
@@ -77,9 +77,28 @@ public class Main {
             }
 
             System.out.println("--------------------------");
-            System.out.println("Farolas de media en Madrid :" + mediaMadrid);
-            System.out.println("--------------------------");
             System.out.println("Total farolas por cada distrito");
+            //calculamos cuantas farolas hay en cada distrito
+            for (String codigo : listaCodDistritos) {
+                Integer numeroTotal = farolasDistrito.get(codigo);
+
+                if (numeroTotal == null) {
+                    numeroTotal = 1;
+                } else {
+                    numeroTotal++;
+                }
+
+                farolasDistrito.put(codigo, numeroTotal);
+            }
+
+            // imprimo el HashMap codigoDistrito - numeroTotalFarolas
+            for (String i : farolasDistrito.keySet()) {
+                System.out.println("Distrito: " + i + ", numero farolas: " + farolasDistrito.get(i));
+            }
+
+            System.out.println("--------------------------");
+            System.out.println("Farolas de media en Madrid :" + mediaMadrid);
+
 
         } catch (Exception ex) {//manejamos excepciones
             ex.printStackTrace();
