@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Main {
 
@@ -13,6 +16,8 @@ public class Main {
         int totalLED = 0;
         int totalDESCARGA = 0;
         int totalLEDDESCARGA = 0;
+        ArrayList<String> listaCodDistritos = new ArrayList<String>();
+        HashMap<String, Integer> farolasDistrito = new LinkedHashMap<String, Integer>();
 
         try {
             String pwd = System.getProperty("user.dir");//ruta directorio actual de trabajo
@@ -42,6 +47,8 @@ public class Main {
                         totalLEDDESCARGA += 1;
                     }
 
+                    //guardamos totos los codigos de distrito en un Arraylist
+                    listaCodDistritos.add(parte[10]);
                 }
                 count++; // count increments as you read lines
             }
