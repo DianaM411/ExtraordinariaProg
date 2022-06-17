@@ -3,7 +3,7 @@ package com.diana;
 public class Main {
 
     //funcion que me imprime de que siglo es un ano dado
-    public static void siglo(String ultimosDigitos , String caso){
+    public static void siglo(String ultimosDigitos, String caso) {
         int salida = 0;
         if (ultimosDigitos.equals("00")) {
             salida = Integer.valueOf(caso.substring(0, 2));
@@ -29,8 +29,8 @@ public class Main {
         String ultimosDigitosCaso3 = stringCaso3.substring(stringCaso3.length() - 2);
 
         //llamamos a la funcion siglo
-        siglo(ultimosDigitosCaso1,stringCaso1);
-        siglo(ultimosDigitosCaso2,stringCaso2);
-        siglo(ultimosDigitosCaso3,stringCaso3);
+        siglo(ultimosDigitosCaso1, stringCaso1);
+        siglo(ultimosDigitosCaso2, stringCaso2);
+        siglo(ultimosDigitosCaso3, stringCaso3);
     }
 }
