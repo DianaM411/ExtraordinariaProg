@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class Main {
 
@@ -17,7 +15,10 @@ public class Main {
         int totalDESCARGA = 0;
         int totalLEDDESCARGA = 0;
         ArrayList<String> listaCodDistritos = new ArrayList<String>();
-        HashMap<String, Integer> farolasDistrito = new LinkedHashMap<String, Integer>();
+        ArrayList<String> nombresDistritos = new ArrayList<String>();
+        HashMap<String, Integer> mapCodigoTotal = new LinkedHashMap<String, Integer>();
+
+        HashMap<String, Integer> mapNombreTotal = new LinkedHashMap<String, Integer>();
 
         try {
             String pwd = System.getProperty("user.dir");//ruta directorio actual de trabajo
@@ -54,6 +55,25 @@ public class Main {
             }
             br.close(); //cerramos BufferedReader
 
+            FileInputStream fis2 = new FileInputStream(ficheroDistritos);
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(fis2));
+
+
+            while ((line = br2.readLine()) != null) { // read through file line by line
+                    String data = line;
+                    String parte[] = data.split(";");//dividimos cada linea en partes separadas por ;
+                    nombresDistritos.add(parte[5]);
+                count++; // count increments as you read lines
+            }
+            br2.close(); //cerramos BufferedReader
+
+
+            // First element's index is always 0
+            int index = 0;
+
+            // Delete first element by passing index
+            nombresDistritos.remove(index);
+
             //calculamos media de farolos en Madrid por distrito
             int totalMadrid = totalLED + totalDESCARGA + totalLEDDESCARGA;
             double mediaMadrid = totalMadrid / 21;
@@ -80,7 +100,7 @@ public class Main {
             System.out.println("Total farolas por cada distrito");
             //calculamos cuantas farolas hay en cada distrito
             for (String codigo : listaCodDistritos) {
-                Integer numeroTotal = farolasDistrito.get(codigo);
+                Integer numeroTotal = mapCodigoTotal.get(codigo);
 
                 if (numeroTotal == null) {
                     numeroTotal = 1;
@@ -88,16 +108,31 @@ public class Main {
                     numeroTotal++;
                 }
 
-                farolasDistrito.put(codigo, numeroTotal);
+                mapCodigoTotal.put(codigo, numeroTotal);
             }
 
+
+
             // imprimo el HashMap codigoDistrito - numeroTotalFarolas
-            for (String i : farolasDistrito.keySet()) {
-                System.out.println("Distrito: " + i + ", numero farolas: " + farolasDistrito.get(i));
+           /*  for (String i : mapCodigoTotal.keySet()) {
+                System.out.println("Distrito: " + i + ", numero farolas: " + mapCodigoTotal.get(i));
             }
 
             System.out.println("--------------------------");
             System.out.println("Farolas de media en Madrid :" + mediaMadrid);
+/*
+            ArrayList<String> nombres = new ArrayList<String>();
+            nombres.addAll(mapCodigoNombre.values());
+*/
+            ArrayList<Integer> totalFarolas = new ArrayList<Integer>();
+            //totalFarolas.addAll();
+
+            Collections.sort(totalFarolas);
+
+
+            for (Integer i : totalFarolas) {
+                System.out.println(i);
+            }
 
 
         } catch (Exception ex) {//manejamos excepciones
